@@ -1,3 +1,11 @@
 api.primewebdev.in {
     reverse_proxy backend:3000
 }
+
+prisma.primewebdev.in {
+    reverse_proxy prisma-studio:5555
+}
+
+mysql.primewebdev.in {
+    reverse_proxy phpmyadmin:80
+}

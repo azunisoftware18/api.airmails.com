@@ -11,25 +11,14 @@ services:
       MYSQL_USER: airmailuser
       MYSQL_PASSWORD: r8ajx9HzHOd8
       MYSQL_ROOT_PASSWORD: r8ajx9HzHOd8
-    # ports:
-      # ⚠️ Local debugging ke liye open. Production me isko comment-out rakho.
-      # - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-pr8ajx9HzHOd8"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pr8ajx9HzHOd8"]
       interval: 10s
       timeout: 5s
-      retries: 10
-
-  adminer:
-    image: adminer
-    container_name: adminer
-    restart: always
-    ports:
-      - "8080:8080"
-    depends_on:
-      - mysql
+      retries: 30
+      start_period: 30s
 
   backend:
     build: .
@@ -45,6 +34,35 @@ services:
     expose:
       - "3000"
 
+  # ✅ Prisma Studio
+  prisma-studio:
+    build: .
+    container_name: prisma-studio
+    command: npx prisma studio
+    expose:
+      - "5555"
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: mysql://airmailuser:r8ajx9HzHOd8@mysql:3306/trishpay_airmail
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # ✅ PhpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: airmailuser
+      PMA_PASSWORD: r8ajx9HzHOd8
+    expose:
+      - "80"
+    depends_on:
+      - mysql
+
   caddy:
     image: caddy:latest
     container_name: caddy
@@ -58,6 +76,8 @@ services:
       - caddy_config:/config
     depends_on:
       - backend
+      - prisma-studio
+      - phpmyadmin
 
 volumes:
   caddy_data:
