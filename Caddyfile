@@ -6,6 +6,11 @@ prisma.primewebdev.in {
     reverse_proxy prisma-studio:5555
 }
 
-mysql.primewebdev.in {
-    reverse_proxy phpmyadmin:80
-}
+    mysql.primewebdev.in {
+        # Basic Auth
+        basicauth /* {
+            azzunique $2a$14$dJbK3ZQ5qsZi0EgQly3s3eV0yC63X.S0wD4ML4plR/XOfuYYJNHSu
+        }
+
+        reverse_proxy phpmyadmin:80
+    }
