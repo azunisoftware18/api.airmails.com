@@ -6,3 +6,9 @@ email-server-host.pem
 migrations
 README.md
 email-server-api.pem
+
+Caddyfile
+docker-compose.yml
+Dockerfile
+deploy.sh
+.dockerignore
