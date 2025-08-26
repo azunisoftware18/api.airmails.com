@@ -38,7 +38,7 @@ services:
   prisma-studio:
     build: .
     container_name: prisma-studio
-    command: npx prisma studio
+    command: npx prisma studio --port 5555 --browser none --host 0.0.0.0
     expose:
       - "5555"
     env_file:
@@ -48,6 +48,7 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+
 
   # ✅ PhpMyAdmin
   phpmyadmin:
