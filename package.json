@@ -27,6 +27,7 @@
     "jsonwebtoken": "^9.0.2",
     "mailparser": "^3.7.4",
     "multer": "^2.0.2",
+    "node-cron": "^4.2.1",
     "nodemailer": "^7.0.5",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2",
