@@ -15,5 +15,5 @@ RUN npx prisma generate
 
 EXPOSE 3000
 
-# Runtime command will also run migrations before start
+# Runtime: run migrations then start app
 CMD npx prisma migrate deploy && node src/index.js
