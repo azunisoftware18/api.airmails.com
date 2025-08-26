@@ -1,23 +1,19 @@
+# Build image
 FROM node:18-alpine
 
 WORKDIR /app
 
-# Build tools for native addons
-RUN apk add --no-cache python3 make g++
+RUN apk add --no-cache python3 make g++ openssl
 
-# npm v10+: node-gyp ko python batane ke liye env
-ENV PYTHON=/usr/bin/python3
-
-# Install deps first (better caching)
 COPY package*.json ./
-RUN if [ -f package-lock.json ]; then \
-      npm ci --legacy-peer-deps --no-audit --progress=false; \
-    else \
-      npm install --legacy-peer-deps --no-audit --progress=false; \
-    fi
+RUN npm install --legacy-peer-deps --no-audit --progress=false
 
-# App source
 COPY . .
 
+# 🔥 Generate Prisma client at build time
+RUN npx prisma generate
+
 EXPOSE 3000
-CMD ["node", "src/index.js"]
+
+# Runtime command will also run migrations before start
+CMD npx prisma migrate deploy && node src/index.js
