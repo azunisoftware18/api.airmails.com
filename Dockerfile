@@ -16,4 +16,4 @@ RUN npx prisma generate
 EXPOSE 3000
 
 # Runtime: run migrations then start app
-CMD npx prisma migrate deploy || npx prisma db push; && node src/index.js
+CMD ["sh","-lc","npx prisma migrate deploy || npx prisma db push; node src/index.js"]
