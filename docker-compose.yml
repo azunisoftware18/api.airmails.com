@@ -9,8 +9,8 @@ services:
     environment:
       MYSQL_DATABASE: trishpay_airmail
       MYSQL_USER: airmailuser
-      MYSQL_PASSWORD: StrongPassword123
-      MYSQL_ROOT_PASSWORD: RootPassword123
+      MYSQL_PASSWORD: r8ajx9HzHOd8
+      MYSQL_ROOT_PASSWORD: r8ajx9HzHOd8
     # ports:
       # ⚠️ Local debugging ke liye open. Production me isko comment-out rakho.
       # - "3306:3306"
