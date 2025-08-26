@@ -1,0 +1,13 @@
+node_modules
+.git
+.github
+Dockerfile*
+docker-compose.yml
+deploy.sh
+*.log
+logs
+tmp
+.cache
+.env
+.env.*
+README.md
