@@ -11,7 +11,7 @@ services:
       MYSQL_USER: airmailuser
       MYSQL_PASSWORD: StrongPassword123
       MYSQL_ROOT_PASSWORD: RootPassword123
-    ports:
+    # ports:
       # ⚠️ Local debugging ke liye open. Production me isko comment-out rakho.
       # - "3306:3306"
     volumes:
@@ -38,9 +38,7 @@ services:
     env_file:
       - .env
     environment:
-      # Ensure backend DB host is the docker service name 'mysql'
-      DATABASE_URL: mysql://trishpay_airmail:r8ajx9HzHOd8@mysql:3306/trishpay_airmail
-      # ↑ ye .env ki value ko override karega. Agar .env me remote/CWP wali value hai to hata do.
+      DATABASE_URL: mysql://airmailuser:r8ajx9HzHOd8@mysql:3306/trishpay_airmail
     depends_on:
       mysql:
         condition: service_healthy
