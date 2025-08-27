@@ -122,7 +122,7 @@ export const createOrRenewSubscription = asyncHandler(async (req, res) => {
   plan = plan.toUpperCase();
   billingCycle = billingCycle.toUpperCase();
 
-  const validPlans = Object.keys(planLimits);
+  const validPlans = Object.keys(planLimits.toUpperCase());
   const validCycles = ["MONTHLY", "YEARLY"];
   if (!validPlans.includes(plan))
     return ApiError.send(res, 400, "Invalid plan");
@@ -207,7 +207,12 @@ export const createOrRenewSubscription = asyncHandler(async (req, res) => {
     },
   });
 
-  if (pendingInvoice && paymentStatus === "SUCCESS" && plan !== "FREE" && razorpayStatus === "captured") {
+  if (
+    pendingInvoice &&
+    paymentStatus === "SUCCESS" &&
+    plan !== "FREE" &&
+    razorpayStatus === "captured"
+  ) {
     await Prisma.invoice.update({
       where: { id: pendingInvoice.id },
       data: { status: "PAID" },
@@ -360,9 +365,8 @@ export const WebhookRazorpay = asyncHandler(async (req, res) => {
     const event = req.body;
     console.log("Webhook event:", event.event);
 
-   
     //  Payment Captured
-   
+
     if (event.event === "payment.captured") {
       const paymentId = event.payload.payment.entity.id;
 
