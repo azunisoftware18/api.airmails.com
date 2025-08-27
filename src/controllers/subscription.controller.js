@@ -131,6 +131,20 @@ export const createOrRenewSubscription = asyncHandler(async (req, res) => {
   if (!validCycles.includes(billingCycle))
     return ApiError.send(res, 400, "Invalid billing cycle");
 
+  const hasSubscribedBefore = await Prisma.subscription.findFirst({
+    where: { userId },
+  });
+
+  if (plan === "FREE") {
+    if (hasSubscribedBefore) {
+      return ApiError.send(
+        res,
+        400,
+        "Free trial is only available for new users"
+      );
+    }
+  }
+
   // ---- Paid plan verification
   if (plan !== "FREE") {
     if (!razorpayOrderId || !razorpayPaymentId)
@@ -257,7 +271,6 @@ export const createRazorpayOrder = asyncHandler(async (req, res) => {
 
   const validPlans = ["BASIC", "PREMIUM"];
   const validCycles = ["MONTHLY", "YEARLY"];
-
 
   if (!validPlans.includes(plan.toUpperCase())) {
     return ApiError.send(res, 400, "Invalid plan createRazorpayOrder");
