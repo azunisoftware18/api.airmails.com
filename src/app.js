@@ -8,7 +8,6 @@ const data = "50mb";
 app.use(
   cors({
     origin: (origin, callback) => {
-      console.log("Origin:", origin);
       const allowed = [
         "https://airmailo.primewebdev.in",
         "http://localhost:5173",

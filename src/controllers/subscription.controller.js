@@ -11,7 +11,7 @@ const MAX_INT = Number.MAX_SAFE_INTEGER;
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_SECRET,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
 
 // ======================= PLAN CONFIG ======================
