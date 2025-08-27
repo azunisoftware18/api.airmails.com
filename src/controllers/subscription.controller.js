@@ -255,10 +255,9 @@ export const createRazorpayOrder = asyncHandler(async (req, res) => {
     return ApiError.send(res, 400, "Plan and billing cycle required");
   }
 
-  const validPlans = ["FREE", "BASIC", "PREMIUM"];
+  const validPlans = ["BASIC", "PREMIUM"];
   const validCycles = ["MONTHLY", "YEARLY"];
 
-  console.log("createRazorpayOrder", plan);
 
   if (!validPlans.includes(plan.toUpperCase())) {
     return ApiError.send(res, 400, "Invalid plan createRazorpayOrder");
@@ -291,27 +290,10 @@ export const createRazorpayOrder = asyncHandler(async (req, res) => {
   };
 
   try {
-    if (plan.toUpperCase() === "FREE") {
-      const dummyOrder = {
-        id: null,
-        amount: 0,
-        currency: "INR",
-        receipt,
-        status: "free",
-        notes: options.notes,
-      };
-
-      return res
-        .status(200)
-        .json(
-          new ApiResponse(200, "Order created successfully (Free)", dummyOrder)
-        );
-    } else {
-      const order = await razorpay.orders.create(options);
-      return res
-        .status(200)
-        .json(new ApiResponse(200, "Order created successfully", order));
-    }
+    const order = await razorpay.orders.create(options);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "Order created successfully", order));
   } catch (error) {
     console.error("Razorpay order creation error:", error);
     return ApiError.send(res, 500, "Failed to create order");
