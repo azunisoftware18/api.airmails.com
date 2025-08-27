@@ -124,7 +124,9 @@ export const createOrRenewSubscription = asyncHandler(async (req, res) => {
 
   const validPlans = Object.keys(planLimits);
   const validCycles = ["MONTHLY", "YEARLY"];
-  if (!validPlans.includes(plan))
+  console.log("createOrRenewSubscription", plan);
+
+  if (!validPlans.includes(plan.toUpperCase()))
     return ApiError.send(res, 400, "Invalid plan");
   if (!validCycles.includes(billingCycle))
     return ApiError.send(res, 400, "Invalid billing cycle");
@@ -207,7 +209,12 @@ export const createOrRenewSubscription = asyncHandler(async (req, res) => {
     },
   });
 
-  if (pendingInvoice && paymentStatus === "SUCCESS" && plan !== "FREE" && razorpayStatus === "captured") {
+  if (
+    pendingInvoice &&
+    paymentStatus === "SUCCESS" &&
+    plan !== "FREE" &&
+    razorpayStatus === "captured"
+  ) {
     await Prisma.invoice.update({
       where: { id: pendingInvoice.id },
       data: { status: "PAID" },
@@ -250,6 +257,8 @@ export const createRazorpayOrder = asyncHandler(async (req, res) => {
 
   const validPlans = ["BASIC", "PREMIUM"];
   const validCycles = ["MONTHLY", "YEARLY"];
+
+  console.log("createRazorpayOrder", plan);
 
   if (!validPlans.includes(plan.toUpperCase())) {
     return ApiError.send(res, 400, "Invalid plan");
@@ -360,9 +369,8 @@ export const WebhookRazorpay = asyncHandler(async (req, res) => {
     const event = req.body;
     console.log("Webhook event:", event.event);
 
-   
     //  Payment Captured
-   
+
     if (event.event === "payment.captured") {
       const paymentId = event.payload.payment.entity.id;
 
