@@ -291,10 +291,27 @@ export const createRazorpayOrder = asyncHandler(async (req, res) => {
   };
 
   try {
-    const order = await razorpay.orders.create(options);
-    return res
-      .status(200)
-      .json(new ApiResponse(200, "Order created successfully", order));
+    if (plan.toUpperCase() === "FREE") {
+      const dummyOrder = {
+        id: null,
+        amount: 0,
+        currency: "INR",
+        receipt,
+        status: "free",
+        notes: options.notes,
+      };
+
+      return res
+        .status(200)
+        .json(
+          new ApiResponse(200, "Order created successfully (Free)", dummyOrder)
+        );
+    } else {
+      const order = await razorpay.orders.create(options);
+      return res
+        .status(200)
+        .json(new ApiResponse(200, "Order created successfully", order));
+    }
   } catch (error) {
     console.error("Razorpay order creation error:", error);
     return ApiError.send(res, 500, "Failed to create order");
