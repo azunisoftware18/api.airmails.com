@@ -255,7 +255,7 @@ export const createRazorpayOrder = asyncHandler(async (req, res) => {
     return ApiError.send(res, 400, "Plan and billing cycle required");
   }
 
-  const validPlans = ["BASIC", "PREMIUM"];
+  const validPlans = ["FREE", "BASIC", "PREMIUM"];
   const validCycles = ["MONTHLY", "YEARLY"];
 
   console.log("createRazorpayOrder", plan);
