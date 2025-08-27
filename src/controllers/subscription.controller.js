@@ -324,6 +324,8 @@ export const getCurrentSubscription = asyncHandler(async (req, res) => {
     include: { invoices: true },
   });
 
+  console.log(subscription);
+
   if (!subscription) {
     return ApiError.send(res, 404, "No active subscription found");
   }
