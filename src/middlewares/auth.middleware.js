@@ -62,7 +62,7 @@ const requireRole = (allowedRoles = []) => {
       return ApiError.send(res, 401, "Not authenticated");
     }
 
-    if (req.user.model !== "USER") {
+    if (req.user.role !== "USER") {
       return ApiError.send(res, 403, "Mailbox users not allowed");
     }
 
