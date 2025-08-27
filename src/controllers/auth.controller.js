@@ -60,54 +60,58 @@ const signup = asyncHandler(async (req, res) => {
     from: "no-reply@primewebdev.in",
     subject: "Verify your email",
     html: `
-    <div class="container">
-      <div class="header">
-        <img src="https://azzunique.com/Images/Logo/09052023135911.png" alt="AzzUnique Software" />
-        <h1>Welcome to AirMailo!</h1>
-        <p>Complete your registration to get started</p>
+  <div style="max-width: 720px; margin: 40px auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); overflow: hidden; font-family: Arial, sans-serif;">
+    
+    <div style="background: linear-gradient(to bottom right, #6366f1, #8b5cf6); padding: 40px 30px; text-align: center; color: white;">
+      <img src="https://azzunique.com/Images/Logo/09052023135911.png" alt="AzzUnique Software" style="filter: brightness(0) invert(1); max-width: 180px; height: auto; margin-bottom: 20px;" />
+      <h1 style="font-size: 28px; font-weight: bold; margin-bottom: 10px;">Welcome to AirMailo!</h1>
+      <p style="font-size: 16px; opacity: 0.9; margin: 0;">Complete your registration to get started</p>
+    </div>
+
+    <div style="padding: 40px 30px;">
+      <h2 style="font-size: 22px; font-weight: 600; color: #111827; margin-bottom: 24px;">Hello ${name},</h2>
+
+      <p style="font-size: 16px; color: #4b5563; line-height: 1.6; margin-bottom: 24px;">
+        Thank you for signing up for AirMailo! We're excited to have you join our platform. To complete your registration and start using all our features, please verify your email address by clicking the button below.
+      </p>
+
+      <div style="text-align: center; margin: 40px 0;">
+        <a href="${verifyLink}" target="_blank" style="background: linear-gradient(to bottom right, #6366f1, #8b5cf6); color: white; padding: 16px 32px; border-radius: 8px; font-weight: 600; text-decoration: none; display: inline-block; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">
+          Verify Email Address
+        </a>
       </div>
 
-      <div class="content">
-        <h2>Hello ${name},</h2>
-        <p>
-          Thank you for signing up for AirMailo! We're excited to have you join our platform. To complete your registration and start using all our features, please verify your email address by clicking the button below.
-        </p>
-
-        <div class="button-container">
-          <a href="${verifyLink}" target="_blank" class="verify-button">
-            Verify Email Address
-          </a>
+      <div style="background-color: #fefce8; border: 1px solid #fef3c7; color: #92400e; padding: 16px; border-radius: 8px; margin: 24px 0; display: flex; align-items: center; font-size: 14px;">
+        <div style="margin-right: 12px;">
+          ⚠️
         </div>
-
-        <div class="alert">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" width="20" height="20">
-            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-          </svg>
-          <div>
-            <strong>Important:</strong> This verification link will expire in 2 minutes for security purposes.
-          </div>
-        </div>
-
-        <div class="copy-link">
-          <h3>Can't click the button?</h3>
-          <p>Copy and paste this link into your browser: ${verifyLink}</p>
-        </div>
-
-        <div class="notice">
-          <strong>Security Notice:</strong> If you didn't create an account with AirMailo, please ignore this email. Your email address will not be added to our system without verification.
+        <div>
+          <strong>Important:</strong> This verification link will expire in 2 minutes for security purposes.
         </div>
       </div>
 
-      <div class="footer">
-        <div class="company">AzzUnique Software Private Limited</div>
-        <a href="https://airmailo.primewebdev.in">airmailo.primewebdev.in</a>
-
-        <div class="links">
-          <a href="https://azzunique.com">Visit Our Website</a>
-          <a href="mailto:support@azzunique.com">Contact Support</a>
-        </div>
+      <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; font-size: 13px; margin: 24px 0;">
+        <h3 style="font-size: 14px; font-weight: 600; margin-bottom: 10px; color: #1f2937;">Can't click the button?</h3>
+        <p style="color: #4b5563; word-break: break-word; line-height: 1.5;">Copy and paste this link into your browser: ${verifyLink}</p>
       </div>
-</div>`,
+
+      <div style="background-color: #f3f4f6; border-radius: 8px; padding: 16px; color: #4b5563; font-size: 14px; margin: 24px 0;">
+        <strong>Security Notice:</strong> If you didn't create an account with AirMailo, please ignore this email. Your email address will not be added to our system without verification.
+      </div>
+    </div>
+
+    <div style="background-color: #f9fafb; padding: 32px 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+      <div style="font-weight: 600; color: #1f2937; margin-bottom: 4px;">AzzUnique Software Private Limited</div>
+      <a href="https://airmailo.primewebdev.in" style="color: #6366f1; text-decoration: none; font-size: 14px;">airmailo.primewebdev.in</a>
+
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+        <a href="https://azzunique.com" style="color: #6b7280; text-decoration: none; font-size: 12px; margin: 0 12px;">Visit Our Website</a>
+        <a href="mailto:support@azzunique.com" style="color: #6b7280; text-decoration: none; font-size: 12px; margin: 0 12px;">Contact Support</a>
+      </div>
+    </div>
+
+  </div>
+  `,
   });
 
   return res.status(200).json(
