@@ -52,7 +52,7 @@ export const verifySubscription = (action) =>
       where: {
         userId,
         isActive: true,
-        paymentStatus: "SUCCESS",
+        OR: [{ paymentStatus: "SUCCESS" }, { plan: "FREE" }],
       },
     });
 
@@ -129,4 +129,3 @@ export const verifySubscription = (action) =>
     }
     return next();
   });
-
