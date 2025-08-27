@@ -261,7 +261,7 @@ export const createRazorpayOrder = asyncHandler(async (req, res) => {
   console.log("createRazorpayOrder", plan);
 
   if (!validPlans.includes(plan.toUpperCase())) {
-    return ApiError.send(res, 400, "Invalid plan");
+    return ApiError.send(res, 400, "Invalid plan createRazorpayOrder");
   }
   if (!validCycles.includes(billingCycle.toUpperCase())) {
     return ApiError.send(res, 400, "Invalid billing cycle");
