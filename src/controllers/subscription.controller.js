@@ -305,6 +305,7 @@ export const createRazorpayOrder = asyncHandler(async (req, res) => {
   };
 
   console.log("Razorpay Order Options:", options);
+  console.log("Razorpay Order razorpay:", razorpay);
 
   try {
     const order = await razorpay.orders.create(options);
