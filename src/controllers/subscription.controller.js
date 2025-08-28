@@ -302,18 +302,22 @@ export const createRazorpayOrder = asyncHandler(async (req, res) => {
     },
   };
 
-  console.log(razorpay);
-  console.log(options);
+  console.log("Razorpay Order Options:", options);
 
-  // try {
-  const order = await razorpay.orders.create(options);
-  return res
-    .status(200)
-    .json(new ApiResponse(200, "Order created successfully", order));
-  // } catch (error) {
-  //   console.error("Razorpay order creation error:", error);
-  //   return ApiError.send(res, 500, "Failed to create order");
-  // }
+  try {
+    const order = await razorpay.orders.create(options);
+    console.log("Razorpay Order Created:", order);
+    return res
+      .status(200)
+      .json(new ApiResponse(200, "Order created successfully", order));
+  } catch (error) {
+    console.error("Razorpay order creation error:", error);
+    return ApiError.send(
+      res,
+      500,
+      error?.error?.description || "Failed to create order"
+    );
+  }
 });
 
 // ======================= GET SUBSCRIPTION ======================
