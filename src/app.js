@@ -10,8 +10,7 @@ app.use(
     origin: (origin, callback) => {
       const allowed = [
         "https://airmailo.com",
-        "https://www.airmailo.com",
-        "http://localhost:5173",
+        //"http://localhost:5173"
       ];
       if (!origin || allowed.includes(origin)) {
         callback(null, true);
