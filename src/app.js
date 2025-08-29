@@ -8,7 +8,7 @@ const data = "50mb";
 app.use(
   cors({
     origin: (origin, callback) => {
-      const allowed = ["https://www.airmailo.com"];
+      const allowed = ["https://airmailo.com", "https://www.airmailo.com"];
       if (!origin || allowed.includes(origin)) {
         callback(null, true);
       } else {
