@@ -57,7 +57,7 @@ export const addDomain = asyncHandler(async (req, res) => {
   const mxRecord = {
     recordType: "MX",
     recordName: "@",
-    recordValue: "mail.primewebdev.in",
+    recordValue: "mail.airmailo.com",
     ttl: 3600,
     domainId: createdDomain.id,
   };

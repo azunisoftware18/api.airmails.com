@@ -14,7 +14,7 @@ import nodemailer from "nodemailer";
 const cookieOptions = {
   httpOnly: true,
   sameSite: "none",
-  domain: ".primewebdev.in",
+  domain: "airmailo.com",
   secure: true,
 };
 
@@ -57,7 +57,7 @@ const signup = asyncHandler(async (req, res) => {
 
   await transporter.sendMail({
     to: email,
-    from: "no-reply@primewebdev.in",
+    from: "no-reply@airmailo.com",
     subject: "Verify your email",
     html: `
   <div style="max-width: 720px; margin: 40px auto; background-color: #ffffff; border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); overflow: hidden; font-family: Arial, sans-serif;">
@@ -102,7 +102,7 @@ const signup = asyncHandler(async (req, res) => {
 
     <div style="background-color: #f9fafb; padding: 32px 30px; text-align: center; border-top: 1px solid #e5e7eb;">
       <div style="font-weight: 600; color: #1f2937; margin-bottom: 4px;">AzzUnique Software Private Limited</div>
-      <a href="https://airmailo.primewebdev.in" style="color: #6366f1; text-decoration: none; font-size: 14px;">airmailo.primewebdev.in</a>
+      <a href="https://airmailo.com" style="color: #6366f1; text-decoration: none; font-size: 14px;">airmailo.com</a>
 
       <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
         <a href="https://azzunique.com" style="color: #6b7280; text-decoration: none; font-size: 12px; margin: 0 12px;">Visit Our Website</a>
@@ -216,14 +216,14 @@ const login = asyncHandler(async (req, res) => {
         httpOnly: true,
         secure: true,
         sameSite: "none",
-        domain: ".primewebdev.in",
+        domain: "airmailo.com",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .cookie("refreshToken", refreshToken, {
         httpOnly: true,
         secure: true,
         sameSite: "none",
-        domain: ".primewebdev.in",
+        domain: "airmailo.com",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
       .json(
@@ -255,14 +255,14 @@ const login = asyncHandler(async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: ".primewebdev.in",
+      domain: "airmailo.com",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     })
     .cookie("refreshToken", refreshToken, {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      domain: ".primewebdev.in",
+      domain: "airmailo.com",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     })
     .json(
