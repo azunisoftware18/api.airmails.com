@@ -16,7 +16,8 @@ const razorpay = new Razorpay({
 
 // ======================= PLAN CONFIG ======================
 const planPricesUSD = {
-  BASIC: 5,
+  // BASIC: 5,
+  BASIC: 1,
   PREMIUM: 15,
 };
 
@@ -242,7 +243,8 @@ export const createOrRenewSubscription = asyncHandler(async (req, res) => {
           plan === "FREE"
             ? 0
             : billingCycle === "MONTHLY"
-              ? planPricesUSD[plan] * 87
+              // ? planPricesUSD[plan] * 87
+              ? planPricesUSD[plan] * 1
               : planPricesUSD[plan] * 87 * 12,
         status: paymentStatus === "SUCCESS" ? "PAID" : "PENDING",
       },
