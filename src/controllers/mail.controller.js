@@ -90,11 +90,11 @@ export const sendEmail = [
     const sendgridAttachments =
       req.files && req.files.length > 0
         ? req.files.map((file) => ({
-          filename: file.originalname,
-          content: file.buffer.toString("base64"),
-          type: file.mimetype,
-          disposition: "attachment",
-        }))
+            filename: file.originalname,
+            content: file.buffer.toString("base64"),
+            type: file.mimetype,
+            disposition: "attachment",
+          }))
         : [];
 
     // Try sending email
@@ -137,6 +137,7 @@ export const sendEmail = [
         attachments: { create: attachmentRecords },
       },
     });
+    console.log(`✅ Stored sent email ${sent}`);
 
     // Create received email record if recipient exists
     const recipient = Array.isArray(to) ? to[0] : to;
@@ -343,7 +344,6 @@ export const getBySingleMail = asyncHandler(async (req, res) => {
     data: { ...mailSafe, sender: senderSafe },
   });
 });
-
 
 // delete send or receiced mail
 export const deleteMail = asyncHandler(async (req, res) => {
@@ -810,7 +810,6 @@ export const getEmailBody = asyncHandler(async (req, res) => {
   }
 });
 
-
 ////////////////////////// sidebar inbox count ///////////////////////////////////
 export const allNewReceivedEmailCount = asyncHandler(async (req, res) => {
   const mailboxId = req.mailbox?.id;
@@ -820,10 +819,12 @@ export const allNewReceivedEmailCount = asyncHandler(async (req, res) => {
   }
 
   const newMailsReceived = await Prisma.receivedEmail.count({
-    where: { mailboxId, isRead: true }
+    where: { mailboxId, isRead: true },
   });
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, "received count fetched", { count: newMailsReceived }));
+  return res.status(200).json(
+    new ApiResponse(200, "received count fetched", {
+      count: newMailsReceived,
+    })
+  );
 });
