@@ -9,8 +9,6 @@ import crypto from "crypto";
 
 const MAX_INT = Number.MAX_SAFE_INTEGER;
 
-console.log("Razorpay ID:", process.env.RAZORPAY_KEY_ID);
-console.log("Razorpay ID:", process.env.RAZORPAY_KEY_SECRET);
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -304,12 +302,8 @@ export const createRazorpayOrder = asyncHandler(async (req, res) => {
     },
   };
 
-  console.log("Razorpay Order Options:", options);
-  console.log("Razorpay Order razorpay:", razorpay);
-
   try {
     const order = await razorpay.orders.create(options);
-    console.log("Razorpay Order Created:", order);
     return res
       .status(200)
       .json(new ApiResponse(200, "Order created successfully", order));
