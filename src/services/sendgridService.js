@@ -16,7 +16,11 @@ export async function createDomain(domain) {
 }
 
 export async function validateDomain(domainId) {
-  const res = await axios.post(`${SENDGRID_API}/whitelabel/domains/${domainId}/validate`, {}, { headers: HEADERS });
+  const res = await axios.post(
+    `${SENDGRID_API}/whitelabel/domains/${domainId}/validate`,
+    {},
+    { headers: HEADERS }
+  );
   return res.data;
 }
 export async function sendViaSendGrid({
@@ -52,8 +56,13 @@ export async function sendViaSendGrid({
     }));
   }
 
-  const res = await axios.post(`${SENDGRID_API}/mail/send`, data, {
-    headers: HEADERS,
-  });
-  return res.data;
+  try {
+    const res = await axios.post(`${SENDGRID_API}/mail/send`, data, {
+      headers: HEADERS,
+    });
+    return res.data;
+  } catch (err) {
+    console.error("🚨 SendGrid Error:", err.response?.data || err.message);
+    throw err;
+  }
 }
