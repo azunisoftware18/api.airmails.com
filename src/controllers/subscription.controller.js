@@ -16,8 +16,8 @@ const razorpay = new Razorpay({
 
 // ======================= PLAN CONFIG ======================
 const planPricesUSD = {
-  // BASIC: 5,
-  BASIC: 1,
+  BASIC: 5,
+  // BASIC: 1, for testing
   PREMIUM: 15,
 };
 
