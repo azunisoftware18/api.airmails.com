@@ -20,6 +20,7 @@ app.use(
     credentials: true,
   })
 );
+app.options("*", cors()); 
 
 app.use(express.json({ limit: data }));
 app.use(express.urlencoded({ extended: true, limit: data }));
