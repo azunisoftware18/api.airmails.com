@@ -69,8 +69,8 @@ async function getUsdToInrRate() {
     const res = await axios.get(
       "https://api.frankfurter.app/latest?from=USD&to=INR"
     );
-    // return res.data.rates?.INR || 83;
-    return 1;
+    return res.data.rates?.INR || 83;
+    // return 1; for testing
   } catch (error) {
     console.error("Error fetching exchange rate:", error);
     return 83;
